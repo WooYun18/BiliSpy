@@ -1,7 +1,13 @@
-# BiliSPY Beta 1.0f
+# BiliSPY Beta 1g
 import requests,random,time,codecs,os
 
 def get_avid(bvid):#Get Avid form Bvid (Using Bilibili API)
+    if len(bvid) != 12:
+        print('Wrong BV ID number.Please check it again.')
+        return -1
+    elif bvid[0:2] != 'BV':
+        print('Wrong BV ID number.Please check it again.')
+        return -1
     bvid_url = 'https://api.bilibili.com/x/web-interface/view?bvid=' + bvid
     content_bvid_url = codecs.decode(requests.get(bvid_url).content, "utf-8").split("\"")
     if int(content_bvid_url[2][1:-1]) != 0:
@@ -26,11 +32,10 @@ def create_path(path):
 while(1):
     bv = input('Please enter your BV ID number:')
     av = get_avid(bv)
-    if av == -1:    continue
     current_vdata = get_avid_data(str(av))
     print('------\nSuccessfully acquired your video data. \n------\nBV:%s,Avid:%s.\nTotal Views:%s,DanmuCounts:%s,Comments:%s.\nLikes:%s,coins:%s,Favourites:%s,Shares:%s.\n------\nHow many times would you like to reload your video data?' % (bv,av,current_vdata[0],current_vdata[1],current_vdata[2],current_vdata[6],current_vdata[4],current_vdata[3],current_vdata[5]))
     repeat_times = input ('Repeat times you want to:')
-    interval_times = input ('Intervals between two acquirys(seconds):')
+    interval_times = input ('Intervals between two inquirys(seconds):')
     attempt_time = 0
     file_path = os.getcwd() + '\\Results\\'+ bv + '\\'
     create_path(file_path)
