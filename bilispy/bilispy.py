@@ -32,6 +32,8 @@ def create_path(path):
 while(1):
     bv = input('Please enter your BV ID number:')
     av = get_avid(bv)
+    if av == -1:
+        continue
     current_vdata = get_avid_data(str(av))
     print('------\nSuccessfully acquired your video data. \n------\nBV:%s,Avid:%s.\nTotal Views:%s,DanmuCounts:%s,Comments:%s.\nLikes:%s,coins:%s,Favourites:%s,Shares:%s.\n------\nHow many times would you like to reload your video data?' % (bv,av,current_vdata[0],current_vdata[1],current_vdata[2],current_vdata[6],current_vdata[4],current_vdata[3],current_vdata[5]))
     repeat_times = input ('Repeat times you want to:')
